@@ -13,6 +13,11 @@
             return $query->fetchAll(PDO::FETCH_OBJ);
         }
         
+        public function getAllSorted($sort, $order) {
+            $query = $this->db->prepare('SELECT * FROM seleccion ORDER BY $sort $order');
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_OBJ);
+        }
 
         public function getById($id_seleccion) {
         $query = $this->db->prepare("SELECT * FROM seleccion WHERE id_seleccion= ?");
