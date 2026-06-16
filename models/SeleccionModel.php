@@ -14,7 +14,17 @@
         }
         
         public function getAllSorted($sort, $order) {
-            $query = $this->db->prepare('SELECT * FROM seleccion ORDER BY $sort $order');
+            if ($sort != 'pais' && $sort != 'cant_mundiales_ganados' &&
+                $sort != 'participaciones_totales' && $sort != 'dt_seleccion') {
+                    
+                    $sort = 'pais';
+            }
+
+            if ($order != 'asc' && $order != 'desc') {
+                $order = 'asc';
+            }
+
+            $query = $this->db->prepare("SELECT * FROM seleccion ORDER BY $sort $order");
             $query->execute();
             return $query->fetchAll(PDO::FETCH_OBJ);
         }
