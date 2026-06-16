@@ -26,9 +26,9 @@ class ApiSeleccionController {
 
     public function getById($req, $res) {
 
-        $id = $req->params->id;
+        $id_seleccion = $req->params->id;
     
-        $seleccion = $this->model->getById($id);
+        $seleccion = $this->model->getById($id_seleccion);
     
         if (!$seleccion) {
             return $res->json(['error' => 'No existe la selección'],404);
@@ -61,5 +61,41 @@ class ApiSeleccionController {
         
         $seleccion = $this->model->getById($id_seleccion);
         return $res->json($seleccion, 200);
+    }
+
+
+    public function create($req, $res) {
+
+        $pais = $req->body->pais ?? null;
+        $dt_seleccion = $req->body->dt_seleccion ?? null;
+        $cant_mundiales_ganados = $req->body->cant_mundiales_ganados ?? null;
+        $participaciones_totales = $req->body->participaciones_totales ?? null;
+        $foto_seleccion = $req->body->foto_seleccion ?? null;
+    
+        if (
+            empty($pais) ||
+            empty($dt_seleccion) ||
+            $cant_mundiales_ganados === null ||
+            $participaciones_totales === null ||
+            empty($foto_seleccion)
+        ) {
+            return $res->json('Falta completar datos', 400);
+        }
+    
+        $id_seleccion = $this->model->addSeleccion(
+            $pais,
+            $dt_seleccion,
+            $cant_mundiales_ganados,
+            $participaciones_totales,
+            $foto_seleccion
+        );
+    
+        if (!$id_seleccion) {
+            return $res->json('Error al insertar', 500);
+        }
+    
+        $seleccion = $this->model->getById($id_seleccion);
+    
+        return $res->json($seleccion, 201);
     }
 }
