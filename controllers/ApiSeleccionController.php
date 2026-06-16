@@ -24,4 +24,17 @@ class ApiSeleccionController {
         return $res->json($selecciones, 200);
     }
 
+    public function getById($req, $res) {
+
+        $id = $req->params->id;
+    
+        $seleccion = $this->model->getById($id);
+    
+        if (!$seleccion) {
+            return $res->json(['error' => 'No existe la selección'],404);
+        }
+    
+        return $res->json($seleccion, 200);
+    }
+
 }
