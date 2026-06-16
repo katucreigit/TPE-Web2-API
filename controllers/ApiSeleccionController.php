@@ -37,4 +37,29 @@ class ApiSeleccionController {
         return $res->json($seleccion, 200);
     }
 
+    public function update($req, $res) {
+        $id_seleccion = $req->params->id;
+        $seleccion = $this->model->getById($id_seleccion);
+
+        if (!$seleccion) {
+            return $res->json("La selección con el id=$id_seleccion no existe", 404);
+        }
+
+        $pais = $req->body->pais ?? null;
+        $cant_mundiales_ganados = $req->body->cant_mundiales_ganados ?? null;
+        $participaciones_totales = $req->body->participaciones_totales ?? null;
+        $dt_seleccion = $req->body->dt_seleccion ?? null;
+        $foto_seleccion = $req->body->foto_seleccion ?? null;
+
+        if (empty($pais) ||  $cant_mundiales_ganados === null || $participaciones_totales === null ||
+            empty($dt_seleccion) || empty($foto_seleccion)) {
+
+            return $res->json('Falta completar datos', 400);
+        }
+
+        $this->model->editSeleccion($id_seleccion,$pais, $dt_seleccion, $cant_mundiales_ganados, $participaciones_totales, $foto_seleccion);
+        
+        $seleccion = $this->model->getById($id_seleccion);
+        return $res->json($seleccion, 200);
+    }
 }
