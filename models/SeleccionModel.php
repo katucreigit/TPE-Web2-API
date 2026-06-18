@@ -58,4 +58,23 @@
             $query->execute([$id_seleccion]);
         }
     }
+
+    public function getFiltered($campo, $valor) {
+
+        $camposPermitidos = [
+            'pais',
+            'cant_mundiales_ganados',
+            'participaciones_totales',
+            'dt_seleccion'
+        ];
+    
+        if (!in_array($campo, $camposPermitidos)) {
+            return [];
+        }
+    
+        $query = $this->db->prepare("SELECT * FROM seleccion WHERE $campo = ?");
+        $query->execute([$valor]);
+    
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
 ?>

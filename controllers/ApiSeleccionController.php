@@ -11,6 +11,15 @@ class ApiSeleccionController {
     }
 
     public function getAll($req, $res){
+
+        $campo = $req->query->filter ?? null;
+        $valor = $req->query->value ?? null;
+    
+        if ($campo && $valor) {
+            $selecciones = $this->model->getFiltered($campo, $valor);
+            return $res->json($selecciones, 200);
+        }
+
         $sort = $req->query->sort ?? null;
 
         $order = $req->query->order ?? 'asc';
@@ -98,4 +107,7 @@ class ApiSeleccionController {
     
         return $res->json($seleccion, 201);
     }
+
+
+
 }
