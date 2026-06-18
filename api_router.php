@@ -3,6 +3,7 @@
 require_once './libs/router/router.php';
 
 require_once './api/controllers/ApiSeleccionController.php';
+require_once './api/controllers/ApiJugadorController.php';
 
 $router = new Router();
 
@@ -17,6 +18,7 @@ $router->addRoute('selecciones/:id', 'PUT', 'ApiSeleccionController', 'update');
 
 $router->addRoute('selecciones/:id', 'DELETE', 'ApiSeleccionController', 'delete');
 
+$router->addRoute('jugadores/seleccion/:id','GET','ApiJugadorController','getJugadoresPorSeleccion');
 
 # ejecuta router
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

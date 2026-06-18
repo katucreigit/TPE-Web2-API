@@ -112,6 +112,17 @@ class ApiSeleccionController {
         return $res->json($seleccion, 201);
     }
 
+    public function delete($req, $res) {
 
+        $id_seleccion = $req->params->id;
+        $seleccion = $this->model->getById($id_seleccion);
+    
+        if (!$seleccion) {
+            return $res->json( "La selección con el id=$id_seleccion no existe",404);
+        }
+    
+        $this->model->deleteSeleccion($id_seleccion);
+        return $res->json("La selección con el id=$id_seleccion fue eliminada",200);
+    }
 
 }
