@@ -62,11 +62,7 @@
     public function getFiltered($campo, $valor) {
 
         $camposPermitidos = [
-            'pais',
-            'cant_mundiales_ganados',
-            'participaciones_totales',
-            'dt_seleccion'
-        ];
+            'pais', 'cant_mundiales_ganados','participaciones_totales','dt_seleccion'];
     
         if (!in_array($campo, $camposPermitidos)) {
             return [];
@@ -75,6 +71,19 @@
         $query = $this->db->prepare("SELECT * FROM seleccion WHERE $campo = ?");
         $query->execute([$valor]);
     
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function getAllPaginated($page, $limit) {
+
+        if (!is_numeric($page) || !is_numeric($limit) || $page < 1 || $limit < 1) {
+            return [];
+        }
+    
+        $offset = ($page - 1) * $limit;
+    
+        $query = $this->db->prepare("SELECT * FROM seleccion LIMIT $limit OFFSET $offset" );
+        $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 ?>

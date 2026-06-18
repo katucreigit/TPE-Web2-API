@@ -14,26 +14,26 @@ class ApiSeleccionController {
 
         $campo = $req->query->filter ?? null;
         $valor = $req->query->value ?? null;
-
+    
         $sort = $req->query->sort ?? null;
         $order = $req->query->order ?? 'asc';
-
+    
         $page = $req->query->page ?? null;
         $limit = $req->query->limit ?? null;
-
-        if ($sort) {
-            $selecciones = $this->model->getAllSorted($sort, $order);
-
-        } else if ($campo && $valor) {
+    
+        if ($campo && $valor) {
             $selecciones = $this->model->getFiltered($campo, $valor);
-
-        }else if ($page && $limit) {
+    
+        } else if ($sort) {
+            $selecciones = $this->model->getAllSorted($sort, $order);
+    
+        } else if ($page && $limit) {
             $selecciones = $this->model->getAllPaginated($page, $limit);
-
+    
         } else {
             $selecciones = $this->model->getAll();
         }
-
+    
         return $res->json($selecciones, 200);
     }
 
