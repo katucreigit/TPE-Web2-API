@@ -141,7 +141,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `username`, `password`, `nombre_apellido`) VALUES
-(1, 'webadmin', '$2y$10$krd3sXwLOGzYwLXwaeRVa.7iuniB8inoYAAV5Vx76mfDkd8hjgUQu', 'Katu Crei');
+(1, 'webadmin', '$2y$10$krd3sXwLOGzYwLXwaeRVa.7iuniB8inoYAAV5Vx76mfDkd8hjgUQu', 'Web Admin');
 
 --
 -- Índices para tablas volcadas
