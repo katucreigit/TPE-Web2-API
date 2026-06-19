@@ -1,15 +1,17 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require_once './libs/router/router.php';
 
-require_once './api/controllers/ApiSeleccionController.php';
-require_once './api/controllers/ApiJugadorController.php';
-require_once './api/controllers/ApiPartidoController.php';
+require_once './controllers/ApiSeleccionController.php';
+require_once './controllers/ApiJugadorController.php';
+require_once './controllers/ApiPartidoController.php';
 
-require_once './app/controllers/auth.api.controller.php';
-require_once './app/middlewares/jwt.middleware.php';
+require_once './controllers/ApiAuthController.php';
+require_once './libs/jwt/JWTMiddleware.php';
 
 $router = new Router();
+$router->addMiddleware(new JWTMiddleware());
 
 #               URL              VERBO   CONTROLADOR              METODO
 //selecciones

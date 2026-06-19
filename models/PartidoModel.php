@@ -1,5 +1,6 @@
 <?php
 
+require_once './models/Model.php';
     class PartidoModel extends Model{
 
         public function __construct() {
@@ -26,7 +27,7 @@
 
         public function addPartido($fecha, $estadio, $fase, $goles_local, $goles_visitante, $seleccion_local, $seleccion_visitante){
             $query = $this->db->prepare("INSERT INTO partido (fecha, estadio, fase, goles_local, goles_visitante, seleccion_local, seleccion_visitante) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $query->execute([fecha, estadio, fase, goles_local, goles_visitante, seleccion_local, seleccion_visitante]);
+            $query->execute([$fecha, $estadio, $fase, $goles_local, $goles_visitante, $seleccion_local, $seleccion_visitante]);
             return $this->db->lastInsertId();
         }
     }

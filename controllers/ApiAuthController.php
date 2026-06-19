@@ -1,5 +1,5 @@
 <?php
-require_once './app/models/user.model.php';
+require_once './models/UserModel.php';
 require_once './libs/jwt/jwt.php';
 
 class AuthApiController {
@@ -31,7 +31,7 @@ class AuthApiController {
         $username = $user_pass[0];
         $password = $user_pass[1];
 
-        $userFromDB = $this->loginModel->getUser($username);
+        $userFromDB = $this->userModel->getUser($username);
 
         if (!$userFromDB || !password_verify($password, $userFromDB->password)) {
             return $res->json("Usuario o contraseña incorrecta", 401);

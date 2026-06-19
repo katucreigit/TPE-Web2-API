@@ -1,5 +1,6 @@
 <?php
 
+require_once './models/Model.php';
     class SeleccionModel extends Model{
 
         public function __construct() {
