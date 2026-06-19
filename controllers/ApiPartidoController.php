@@ -10,8 +10,18 @@ class ApiPartidoController {
         $this->model = new PartidoModel();
     }
 
-    public function getAll($req, $res){
-        //TO DO JAJAJA
+    public function getAll($req, $res) {
+
+        $fase = $req->query->fase ?? null;
+    
+        if ($fase) {
+            $partidos = $this->model->getByFase($fase);
+        }
+        else {
+            $partidos = $this->model->getAll();
+        }
+    
+        return $res->json($partidos, 200);
     }
 
     public function getById($req, $res) {

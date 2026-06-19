@@ -6,6 +6,18 @@
         parent::__construct();
         }
 
+        public function getAll() {
+            $query = $this->db->prepare("SELECT * FROM partido");
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        public function getByFase($fase) {
+            $query = $this->db->prepare("SELECT * FROM partido WHERE fase = ?");
+            $query->execute([$fase]);
+            return $query->fetchAll(PDO::FETCH_OBJ);
+        }
+
         public function getById($id_partido) {
             $query = $this->db->prepare("SELECT * FROM partido WHERE id_partido= ?");
             $query->execute([$id_partido]);
