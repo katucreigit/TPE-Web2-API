@@ -37,6 +37,9 @@ class ApiPartidoController {
     }
 
     public function create($req, $res) {
+        if (!$req->user) {
+            return $res->json("No autorizado", 401);
+        }
 
         $fecha = $req->body->fecha ?? null;
         $estadio = $req->body->estadio ?? null;

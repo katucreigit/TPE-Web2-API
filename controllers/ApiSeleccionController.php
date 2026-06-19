@@ -2,7 +2,6 @@
 require_once __DIR__ . '/../models/SeleccionModel.php';
 
 class ApiSeleccionController {
-
     private $model;
 
     public function __construct() {
@@ -51,6 +50,10 @@ class ApiSeleccionController {
     }
 
     public function update($req, $res) {
+        if (!$req->user) {
+            return $res->json("No autorizado", 401);
+        }
+
         $id_seleccion = $req->params->id;
         $seleccion = $this->model->getById($id_seleccion);
 
@@ -78,6 +81,10 @@ class ApiSeleccionController {
 
 
     public function create($req, $res) {
+
+        if (!$req->user) {
+            return $res->json("No autorizado", 401);
+        }
 
         $pais = $req->body->pais ?? null;
         $dt_seleccion = $req->body->dt_seleccion ?? null;
