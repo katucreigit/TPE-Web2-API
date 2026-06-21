@@ -51,6 +51,8 @@ class ApiPartidoController {
     
         if (
             empty($fecha) ||
+            empty($estadio) ||
+            empty($fase) ||
             !is_numeric($goles_local) ||
             !is_numeric($goles_visitante) ||
             $goles_local < 0 ||

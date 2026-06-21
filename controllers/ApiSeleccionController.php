@@ -121,6 +121,10 @@ class ApiSeleccionController {
 
     public function delete($req, $res) {
 
+        if (!$req->user) {
+            return $res->json("No autorizado", 401);
+        }
+
         $id_seleccion = $req->params->id;
         $seleccion = $this->model->getById($id_seleccion);
     
