@@ -1,8 +1,8 @@
-# API REST - Álbum Mundial
+# API RESTful - Álbum virtual del mundial
 
 ## Descripción
 
-API REST en PHP para gestionar selecciones, jugadores y partidos de un álbum del Mundial.
+API RESTful en PHP para gestionar selecciones, jugadores y partidos de un álbum virtual del mundial.
 
 ## Autenticación
 
@@ -22,14 +22,14 @@ Authorization: Bearer <token>
 
 ## Selecciones
 
-### GET todas
+### Obtener todas
 
 GET /api/selecciones
 
 Opcional:
-- filter y value
-- sort y order
-- page y limit
+- filter y value(podes elegir un campo y un valor para filtrar selecciones)
+- sort y order(podes ordenar por un campo y orden las selecciones)
+- page y limit(podes paginar las selecciones)
 
 Ejemplos:
 GET /api/selecciones?filter=pais&value=Argentina
@@ -37,12 +37,12 @@ GET /api/selecciones?sort=pais&order=asc
 GET /api/selecciones?page=1&limit=5
 
 
-### GET por ID
+### Obtener una seleccion por ID
 
 GET /api/selecciones/:id
 
 
-### POST
+### Agregar una seleccion
 
 POST /api/selecciones
 
@@ -56,33 +56,36 @@ Body:
 }
 
 
-### PUT
+### Editar una seleccion por Id
 
 PUT /api/selecciones/:id
 
 Body igual al POST.
 
 
-### DELETE
+### Eliminar una seleccion por Id
 
 DELETE /api/selecciones/:id
 
 
 ## Partidos
 
-### GET todos
+### Obtener todos los partidos
 
 GET /api/partidos
 
 Opcional:
-?fase=Grupos
+-Filtrar por fase
+
+Ejemplo:
+GET /api/partidos?fase=Grupos
 
 
-### GET por ID
+### Obtener un partido por ID
 
 GET /api/partidos/:id
 
-### POST
+### Agregar un partido
 
 POST /api/partidos
 
@@ -99,7 +102,7 @@ Body:
 
 ## Jugadores
 
-### GET por selección
+### Obtener jugadores por selección
 
 GET /api/jugadores/seleccion/:id
 

@@ -15,7 +15,7 @@ class ApiJugadorController {
         $jugador = $this->model->getById($id_jugador);
     
         if (!$jugador) {
-            return $res->json(['error' => 'No existe el jugador'],404);
+            return $res->json('No existe el jugador',404);
         }
         return $res->json($jugador, 200);
     }

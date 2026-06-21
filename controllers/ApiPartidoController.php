@@ -30,7 +30,7 @@ class ApiPartidoController {
         $partido = $this->model->getById($id_partido);
     
         if (!$partido) {
-            return $res->json(['error' => 'No existe el partido'],404);
+            return $res->json('No existe el partido',404);
         }
     
         return $res->json($partido, 200);

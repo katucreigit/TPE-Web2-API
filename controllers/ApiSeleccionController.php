@@ -43,7 +43,7 @@ class ApiSeleccionController {
         $seleccion = $this->model->getById($id_seleccion);
     
         if (!$seleccion) {
-            return $res->json(['error' => 'No existe la selección'],404);
+            return $res->json('No existe la selección',404);
         }
     
         return $res->json($seleccion, 200);
@@ -58,7 +58,7 @@ class ApiSeleccionController {
         $seleccion = $this->model->getById($id_seleccion);
 
         if (!$seleccion) {
-            return $res->json("La selección con el id=$id_seleccion no existe", 404);
+            return $res->json("La selección con el id: $id_seleccion no existe", 404);
         }
 
         $pais = $req->body->pais ?? null;
@@ -129,11 +129,11 @@ class ApiSeleccionController {
         $seleccion = $this->model->getById($id_seleccion);
     
         if (!$seleccion) {
-            return $res->json( "La selección con el id=$id_seleccion no existe",404);
+            return $res->json( "La selección con el id: $id_seleccion no existe",404);
         }
     
         $this->model->deleteSeleccion($id_seleccion);
-        return $res->json("La selección con el id=$id_seleccion fue eliminada",200);
+        return $res->json("La selección con el id: $id_seleccion fue eliminada",200);
     }
 
 }
