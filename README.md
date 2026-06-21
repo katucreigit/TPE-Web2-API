@@ -4,47 +4,80 @@
 
 API RESTful en PHP para gestionar selecciones, jugadores y partidos de un álbum virtual del mundial.
 
+## Endpoints disponibles
+
+### Autenticación
+- GET /api/auth/token
+
+### Selecciones
+- GET /api/selecciones
+- GET /api/selecciones/:id
+- POST /api/selecciones
+- PUT /api/selecciones/:id
+- DELETE /api/selecciones/:id
+
+### Partidos
+- GET /api/partidos
+- GET /api/partidos/:id
+- POST /api/partidos
+
+### Jugadores
+- GET /api/jugadores/seleccion/:id
+
+## Documentación de los endpoints
+
 ## Autenticación
+
+La API utiliza JWT para proteger las operaciones de modificación.
 
 ### Obtener token
 
-GET /api/auth/token
+**GET** /api/auth/token
+
+Se debe enviar autenticación Basic:
 
 Header:
 Authorization: Basic base64(username:password)
 
+Usuario de prueba:
+- Usuario: webadmin  
+- Contraseña: admin
+
 ### Uso del token
 
-Para POST, PUT y DELETE:
+El token obtenido debe enviarse en el header Authorization para las operaciones protegidas:
+- POST
+- PUT
+- DELETE
 
+Header:
 Authorization: Bearer <token>
-
 
 ## Selecciones
 
 ### Obtener todas
 
-GET /api/selecciones
+**GET** /api/selecciones
 
-Opcional:
-- filter y value(podes elegir un campo y un valor para filtrar selecciones)
-- sort y order(podes ordenar por un campo y orden las selecciones)
-- page y limit(podes paginar las selecciones)
+Parámetros opcionales:
+- filter y value: permiten filtrar por cualquier campo.
+- sort y order: permiten ordenar por cualquier campo en forma ascendente o descendente.
+- page y limit: permiten paginar los resultados.
 
 Ejemplos:
-GET /api/selecciones?filter=pais&value=Argentina
-GET /api/selecciones?sort=pais&order=asc
-GET /api/selecciones?page=1&limit=5
+- GET /api/selecciones?filter=pais&value=Argentina
+- GET /api/selecciones?sort=pais&order=asc
+- GET /api/selecciones?page=1&limit=5
 
 
 ### Obtener una seleccion por ID
 
-GET /api/selecciones/:id
+**GET** /api/selecciones/:id
 
 
 ### Agregar una seleccion
 
-POST /api/selecciones
+**POST** /api/selecciones
 
 Body:
 {
@@ -58,36 +91,36 @@ Body:
 
 ### Editar una seleccion por Id
 
-PUT /api/selecciones/:id
+**PUT** /api/selecciones/:id
 
 Body igual al POST.
 
 
 ### Eliminar una seleccion por Id
 
-DELETE /api/selecciones/:id
+**DELETE** /api/selecciones/:id
 
 
 ## Partidos
 
 ### Obtener todos los partidos
 
-GET /api/partidos
+**GET** /api/partidos
 
 Opcional:
 -Filtrar por fase
 
 Ejemplo:
-GET /api/partidos?fase=Grupos
+- GET /api/partidos?fase=Grupos
 
 
 ### Obtener un partido por ID
 
-GET /api/partidos/:id
+**GET** /api/partidos/:id
 
 ### Agregar un partido
 
-POST /api/partidos
+**POST** /api/partidos
 
 Body:
 {
@@ -104,8 +137,12 @@ Body:
 
 ### Obtener jugadores por selección
 
-GET /api/jugadores/seleccion/:id
+**GET** /api/jugadores/seleccion/:id
 
 ## Códigos de respuesta
-
-200, 201, 400, 401, 404, 500
+- 200 OK
+- 201 Created
+- 400 Bad Request
+- 401 Unauthorized
+- 404 Not Found
+- 500 Internal Server Error
